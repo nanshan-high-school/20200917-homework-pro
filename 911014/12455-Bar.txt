@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int data;
+	cin >> data;
+
+	int want[data];
+	int quan[data];
+	int	lg[data][20];
+	bool rst[data];
+
+	for (int i = 0; i < data; i++) {
+		cin >> want[i];
+		cin >> quan[i];
+		for (int j = 0; j < quan[i]; j++) {
+			cin >> lg[i][j];
+		}
+	}
+
+	int check[data][10000];
+	
+	for (int i = 0; i < data; i++) {
+		for (int j = 0; j < 10000; j++) {
+			check[i][j] = -1;
+		}
+	}
+
+	for (int i = 0; i < data; i++) {
+		check[i][0] = 1;
+		for (int j = 0; j < quan[i]; j++) {
+			for (int k = 9999; k >= 0; k--) {
+				if (check[i][k] != -1) {
+					check[i][k + lg[i][j]] = 1;
+				}
+			}
+		}
+	}
+
+	for (int i = 0; i < data; i++) {
+		for (int j = 0; j < 10000; j++) {
+			if (check[i][want[i]] == 1) rst[i] = true; 
+		}
+	}
+
+	for (int i = 0; i < data; i++) {
+		if (rst[i] == true) cout << "YES" << endl;
+		else cout << "NO" << endl;
+	}
+}
