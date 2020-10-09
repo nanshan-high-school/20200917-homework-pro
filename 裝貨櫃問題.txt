@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int quan;
+	int bag[10000];
+	
+	while(true) {
+		int bg = -1;
+		for (int i = 0; i < 10000; i++) {
+			bag[i] = -1;
+		}
+		
+		cin >> quan;
+		int data[quan][2];
+
+		for (int i = 0; i < quan; i++) {
+			for (int j = 0; j < 2; j++) {
+				cin >> data[i][j];
+			}
+		}
+
+		for (int i = 0; i < quan; i++) {
+			bag[data[i][0]] = data[i][1]; 
+		}
+
+		for (int j = 1; j < quan; j++) {
+			for (int k = 9999; k >= 0; k--) {
+				if (bag[k] != -1 && k != data[j][0]) {
+					bag[k + data[j][0]] = data[j][1] + bag[k];
+				}
+			}
+		}
+
+		for (int i = 0; i <= 100; i++) {
+			if (bag[i] > bg) bg = bag[i];
+		}
+
+		cout << bg;
+	}
+}
