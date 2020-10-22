@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    long long dp[30100]={1};
+    int coin[5]={1,5,10,25,50};
+    for(int i=0; i<5; i++){
+        for(int j=0; j<30001; j++){
+            dp[j+coin[i]]+=dp[j];
+        }
+    }
+    int n;
+    while(cin >> n){
+        if(n<5){
+            cout << "There is only 1 way to produce " << n << " cents change.\n";
+        }else{
+            cout << "There are " << dp[n] << " ways to produce " << n << " cents change.\n";
+        }
+    }
+}
