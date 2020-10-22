@@ -1,0 +1,19 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n,a,b,dp[101]={0},dpCheck[101]={1};
+    cin >> n;
+    for(int i=0; i<n; i++){
+        cin >> a;
+        cin >> b;
+        for(int j=100-a; j>-1; j--){
+            if(dpCheck[j]){
+                dp[j+a]=max(dp[j+a],dp[j]+b);
+                dpCheck[j+a]=1;
+            }
+        }
+    }
+    cout << *max_element(dp, dp+101);
+}
