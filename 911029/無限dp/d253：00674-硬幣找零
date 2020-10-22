@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int dp[8000]={1};
+    int coin[5]={1,5,10,25,50};
+
+    for(int i=0; i<5; i++){
+        for(int j=0; j<7491; j++){
+            dp[j+coin[i]]+=dp[j];
+        }
+    }
+    int n;
+    while(cin >> n){
+        cout << dp[n] << "\n";
+    }
+}
