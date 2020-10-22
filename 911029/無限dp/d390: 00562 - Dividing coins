@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main() {
+    int n,m,b,a,dp[25001];
+    cin >> n;
+    for(int i=0; i<n; i++){
+        memset(dp,0,25001);
+        dp[0]=1;
+        a=0;
+        b=0;
+        cin >> m;
+        for(int j=0; j<m; j++){
+            cin >> a;
+            b+=a;
+            for(int k=25000-a; k>-1; k--){
+                if(dp[k]){
+                    dp[k+a]=1;
+                }
+            }
+        }
+        for(int j=b/2; j>-1; j--){
+            if(dp[j]){
+                cout << b-2*j << "\n";
+                break;
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double n=0;
+    int cash[11]={5,10,20,50,100,200,500,1000,2000,5000,10000},l;
+    long long dp[40001]={1};
+    for(int i=0; i<11; i++){
+        for(int j=0; j<30000; j++){
+            dp[j+cash[i]]+=dp[j];
+        }
+    }
+    while(cin >> n && n!=0){
+        l=10000*n;
+        //cout << 100*n << "  " << l << "\n"; 
+        cout << setw(6) << setfill(' ') << fixed << setprecision(2) << n << setw(17) << setfill(' ') << dp[l/100] << "\n";
+    }
+}

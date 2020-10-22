@@ -1,0 +1,20 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n;
+    while(cin >> n){
+        int a,b,dpVolume[101]={0},dpCheck[101]={1};
+        for(int i=0; i<n; i++){
+            cin >> a >> b;
+            for(int j=100-a; j>-1; j--){
+                if(dpCheck[j]){
+                    dpVolume[j+a]=max(dpVolume[j+a],dpVolume[j]+b);
+                    dpCheck[j+a]=1;
+                }
+            }
+        }
+        cout << *max_element(dpVolume,dpVolume+101) << "\n";
+    }
+}

@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int t,n,p,a=0;
+    cin >> t;
+    for(int i = 0; i < t; i++){
+        cin >> n >> p;
+        int len[1001]={};
+        len[0]=1;
+        for(int j = 0; j < p; j++){
+            cin >> a;
+            for(int k=n-a; k>-1; k--){
+                if(len[k] && !len[k+a]){
+                    len[k+a]=1;
+                }
+            }
+        }
+        if(len[n]){
+            cout << "YES\n";
+        }else{
+            cout << "NO\n";
+        }
+    }
+}
