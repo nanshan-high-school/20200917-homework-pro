@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
 
 int main() {
@@ -14,35 +13,35 @@ int main() {
             cin >> coin[i];
         }
 
-        int lab[(int)pow(2, m)];
-        for (int i = 0; i < pow(2, m); i++) {
-            lab[i] = 0;
-        }
-
-        bool half;
+        long long total = 0;
         for (int i = 0; i < m; i++) {
-            half = false;
-            for (int j = 0; j < pow(2, m); j++) {
-                if (half) {
-                    lab[j] -= coin[i];
-                } else {
-                    lab[j] += coin[i];
-                }
-                if ((j + 1) % (int)pow(2, m - i - 1) == 0) {
-                    half = !half;
+            total += coin[i];
+        }
+
+        int tHalf = total / 2;
+        int t[tHalf + 1];
+        for (int i = 0; i <= tHalf; i++) {
+            t[i] = 0;
+        }
+        t[0] = 1;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = tHalf; j >= 0; j--) {
+                if (t[j] == 1) {
+                    if (j + coin[i] <= tHalf) {
+                        t[j + coin[i]] = 1;
+                    }                    
                 }
             }
         }
 
-        int min = 10000;
-        for (int i = 0; i < pow(2, m); i++) {
-            if (lab[i] < 0) {
-                lab[i] *= -1;
-            }
-            if (lab[i] < min) {
-                min = lab[i];
+        int max = -1;
+        for (int i = 0; i <= tHalf; i++) {
+            if (t[i] == 1) {
+                max = i;
             }
         }
-        cout << min << "\n";
+        cout << total - max * 2 << "\n";
     }
+    return 0;
 }
